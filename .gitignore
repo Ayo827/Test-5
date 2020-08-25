@@ -1,0 +1,8 @@
+#ignore credential.js
+/credential.js
+
+#ignore node modules
+node_modules
+
+#ignore Certificate Authority
+/ssl/*.*

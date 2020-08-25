@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <link href = "style.css" rel = "stylesheet" type = "text/css">
+    </head>
+    <body>
+        <!--using "vw" view port width for responsive design-->
+        <h1 style = "font-size: 8vw;">Hello World</h1>
+        <p style = "font-size: 2vw;">resize the browser window to see how the font size scale</p>
+
+        <!-- using media queries-->
+        <div class = "responsive">
+            <h5>What is your name?</h5>
+            <p>My name is Yung Carter</p>
+        </div>
+        <style>
+            .responsive{
+                background-color: lightblue;
+                padding-top: 20px;
+            }
+            @media screen and (min-width: 601px) {
+                .responsive{
+                    font-size: 80px;
+                }
+            }
+            @media screen and (max-width: 600px) {
+                .responsive{
+                    font-size: 30px;
+                }
+            }
+        </style>
+
+<h1>Header 1</h1>
+<h2>Header 2</h2>
+<h3>Header 3</h3>
+<h4>Header 4</h4>
+<h5>Header 5</h5>
+<h6>Header 6</h6>
+ 
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit iusto adipisci, cupiditate animi, itaque qui aspernatur vel corrupti labore minima, excepturi ab, fuga rem dolores. Ratione sunt autem iusto aliquid.
+</p>
+ 
+<ul>
+  <li>List Item 1</li>
+  <li>List Item 2</li>
+  <li>List Item 3</li>
+</ul>
+ 
+<ol>
+  <li>List Item 1</li>
+  <li>List Item 2</li>
+  <li>List Item 3</li>
+</ol>
+    </body>
+    
+</html>

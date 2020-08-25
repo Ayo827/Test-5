@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <a href = "about">About</a>
+        <a href ="vacations">Vacation</a>
+        <a href="contest/vacation-photo">vacation-photo</a>
+        <a class="requestGroupRate" href="tours/request-group-rate">Request Group Rate.</a>
+        <header><img src = "piggy.png"></header>
+        <h1>Welcome to Meadowlark Travel</h1>
+        {{! Designing a file upload form}}
+<form class = "form-horizontal" role = "form" enctype="multipart/form-data" method="POST" action="/contest/vacation-photo/{year}/{month}">
+    <input type="hidden" name="_csrf" value="{{_csrfToken}}">
+    <div class="form-group" >
+         <label for="fieldName" class="col-sm-2 control-label" >Name</label>
+        <div class="col-sm-4" >
+            <input type="text" class="form-control" id="fieldName" name="name" >
+        </div>
+    </div>
+    <div class="form-group" >
+        <label for="fieldEmail" class="col-sm-2 control-label" >Email</label>
+        <div class="col-sm-4" >
+            <input type="email" class="form-control" required id="fieldName" name="email" >
+        </div>
+    </div>
+    <div class="form-group" >
+        <label for="fieldPhoto" class="col-sm-2 control-label" >Vacation photo</label>
+        <div class="col-sm-4" >
+            <input type="file" class="form-control" required accept="image/*" id="fieldPhoto" name="photo" >
+        </div>
+    </div>
+     <div class="form-group" >
+        <div class="col-sm-offset-2 col-sm-4" >
+            <button type="submit" class="btn btn-primary" >Submit</button>
+        </div>
+    </div>
+</form>
+        {{> weather}}
+        {{#section 'footer'}}
+            <footer>This is a footer</footer>
+        {{/section}}
+
+
+        
+<table cellpadding="0" cellspacing="0" border="0" id="backgroundTable" >
+ <tr>
+ <td valign="top" >
+ <table cellpadding="0" cellspacing="0" border="0" align="center" >
+ <tr>
+ <td width="200" valign="top" ><img class="image_fix"
+ src="http://meadowlarktravel.com/email/logo.png"
+ alt="Meadowlark Travel" title="Meadowlark Travel"
+ width="180" height="220" /></td>
+ </tr>
+ <tr>
+ <td width="200" valign="top" ><p>
+ Thank you for booking your trip with Meadowlark Travel,
+ {{cart.billing.name}}. </p><p>Your reservation number
+ is {{cart.number}}. </p></td>
+ </tr>
+ <tr>
+ <td width="200" valign="top" >Problems with your reservation?
+ Contact Meadowlark Travel at
+ <span class="mobile_link" >555-555-0123</span>. </td>
+ </tr>
+ </table>
+ </td>
+ </tr>
+</table>
+
+    </body>
+</html>
+
