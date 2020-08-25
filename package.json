@@ -32,5 +32,17 @@
     "grunt-mocha-test": "^0.13.3",
     "mocha": "^8.1.1",
     "zombie": "^6.1.4"
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayo827/Test-5.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Ayo827/Test-5/issues"
+  },
+  "homepage": "https://github.com/Ayo827/Test-5#readme"
 }
