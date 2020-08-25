@@ -199,7 +199,7 @@ app. use(function(req, res, next){
 
 //require nodemailer
 var nodemailer = require('nodemailer');
-const { strict } = require('assert');
+var strict  = require('assert');
 var mailTransport = nodemailer.createTransport({
                      service: 'Gmail',
                      auth: {
@@ -316,10 +316,10 @@ app.get('/tours/hood-river', function(req, res){
 
 app.get('/request-rate', function(req, res){
     res.render('request-rate');
-})
+});
 app.post('/request-rate', function(req, res){
     res.redirect(303, '/thank-you');
-})
+});
 app.get('/newsletter' , function(req, res, next){
     // we will learn about CSRF later...for now, we just
                                 // provide a dummy value
