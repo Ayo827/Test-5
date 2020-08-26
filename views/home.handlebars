@@ -34,7 +34,24 @@
         </div>
     </div>
 </form>
-        {{> weather}}
+
+{{!for partials---handlebars}}
+     {{!-- {{> weather}} --}}
+
+     {{!Using Block}}
+ <div class="weatherWidget" >
+    {{#each weatherpro}}
+         <div class="location" >
+                <h3>{{name}}</h3>
+                <a href="{{forecastUrl}}" >
+                     <img src="{{iconUrl}}" alt="{{weather}}" >
+                    {{weather}}, {{temp}}
+                </a>
+            </div>
+    {{/each}}
+ <small>Source: <a href="http://www.wunderground.com" >Weather Underground</a></small>
+</div>
+{{!Using a section. }}
         {{#section 'footer'}}
             <footer>This is a footer</footer>
         {{/section}}

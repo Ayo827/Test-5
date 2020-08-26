@@ -246,7 +246,7 @@ app.set('port', process.env.PORT || 3000);
 // });
 // making routes based on handlebars view engine
 app.get('/', function(req, res){
-    res.render('home');
+    res.render('home', {weatherpro: getWeatherData()});
 });
 
 var fortunes = [
@@ -266,34 +266,36 @@ app.get('/contest/vacation-photo', function(req, res){
     res.render('contest/vacation-photo');
 });
 function getWeatherData(){
+    var locations = [
+        {
+          name: 'Portland' ,
+          forecastUrl: 'http://www.wunderground.com/US/OR/Portland.html' ,
+          iconUrl: 'http://icons-ak.wxug.com/i/c/k/cloudy.gif' ,
+          weather: 'Overcast' ,
+          temp: '54.1 F (12.3 C)'
+        },
+          {
+          name: 'Bend' ,
+          forecastUrl: 'http://www.wunderground.com/US/OR/Bend.html' ,
+          iconUrl: 'http://icons-ak.wxug.com/i/c/k/partlycloudy.gif' ,
+          weather: 'Partly Cloudy',
+          temp: '55.0 F (12.8 C)' 
+          },
+          {
+          name: 'Manzanita' ,
+          forecastUrl: 'http://www.wunderground.com/US/OR/Manzanita.html' ,
+          iconUrl: 'http://icons-ak.wxug.com/i/c/k/rain.gif' ,
+          weather: 'Light Rain' ,
+          temp: '55.0 F (12.8 C)'
+           }
+      ];
+      var random = locations[Math.floor(Math.random() * locations.length)];
     return {
-    locations: [
-    {
-    name: 'Portland' ,
-    forecastUrl: 'http://www.wunderground.com/US/OR/Portland.html' ,
-    iconUrl: 'http://icons-ak.wxug.com/i/c/k/cloudy.gif' ,
-    weather: 'Overcast' ,
-    temp: '54.1 F (12.3 C)'
-    },
-    {
-    name: 'Bend' ,
-    forecastUrl: 'http://www.wunderground.com/US/OR/Bend.html' ,
-    iconUrl: 'http://icons-ak.wxug.com/i/c/k/partlycloudy.gif' ,
-    weather: 'Partly Cloudy',
-    temp: '55.0 F (12.8 C)' 
-    },
-    {
-    name: 'Manzanita' ,
-    forecastUrl: 'http://www.wunderground.com/US/OR/Manzanita.html' ,
-    iconUrl: 'http://icons-ak.wxug.com/i/c/k/rain.gif' ,
-    weather: 'Light Rain' ,
-    temp: '55.0 F (12.8 C)'
-    }
-    ]
+       random
     };
    }
    //doing a partial
-   app.use(function(req, res, next){
+ app.use(function(req, res, next){
     if(!res.locals.partials) res.locals.partials = {};
     res.locals.partials.weather = getWeatherData();
     next();
