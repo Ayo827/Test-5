@@ -353,7 +353,7 @@ mailTransport.sendMail({
 }, function(err){
  if(err) console. error( 'Unable to send email: ' + err );
  else{
-     console.log("The mail has been sent");
+     console.log("The mail has been sent"); 
  }
 });
 //     // console.log('Form (from querystring): ' + req.query.form);
@@ -364,7 +364,7 @@ mailTransport.sendMail({
     
 //     // var signedMonster = req.signedCookies.monster; //to retrieve the value of the cookie
 //     // console.log(signedMonster);
-    res.redirect(303, '/thank-you' );
+   res.redirect(303, '/thank-you' );
    });
 
 //MAKING A POST FOR THE FLASH MESSAGE FOR THE NEWSLETTER FORM
