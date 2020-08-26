@@ -314,9 +314,6 @@ app.get('/tours/hood-river', function(req, res){
     res.render('tours/request-group-rate');
 });
 
-app.get('/request-rate', function(req, res){
-    res.render('request-rate');
-});
 app.post('/request-rate', function(req, res){
     res.redirect(303, '/thank-you');
 });
