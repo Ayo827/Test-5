@@ -26,7 +26,7 @@ var session = require('express-session');
 app.use(session({
                 name: 'sid',
                 secret: 'This is a session',
-                cookie: {cookieName: 'monster',value: 'nom nom', signed: true, path: '/', httpOnly:true,  secure:true, maxAge: 6000},
+                cookie: {cookieName: 'sessionCookie',value: 'nom nom', signed: true, path: '/', httpOnly:true,  secure:true, maxAge: 6000},
                 resave: false,
                 saveUninitialized: false,
                 sameSite: true
@@ -232,13 +232,13 @@ app.set('port', process.env.PORT || 3000);
 // });
 
 //Making a middleware for a flash message
-// app. use(function(req, res, next){
-//     // if there's a flash message, transfer
-//     // it to the context, then clear it
-//     res.locals.flash = req.session.flash;
-//     delete req.session.flash;
-//     next();
-//    });
+app.use(function(req, res, next){
+    // if there's a flash message, transfer
+    // it to the context, then clear it
+    res.locals.flash = req.session.flash;
+    console.log(req.session.flash);
+    next();
+   });
 
 //ROUTES
 // app.get('/*', function(req, res){
@@ -341,9 +341,9 @@ app.post('/process' , function(req, res){
     id = {name: req.body.name, email: req.body.email};
     console.log(req.session.id);
     console.log(id);
-   // req.session.cookie = {id: req.session.id};
-   // console.log(req.session.cookie);
-   res.cookie('monster', 'nom nom', {signed: true, path: '/process',httpOnly:true, sameSite: true, secure:true, maxAge: 6000}, {id: req.session.id});//setting up the cookie
+   req.session.user = 'Anonymous';
+   req.session.cookie = {id: req.session.id};
+   res.cookie('monster', 'nom nom', {signed: true, path: '/process', httpOnly: true, sameSite: true, secure:true, maxAge: 6000}, {id: req.session.id});//setting up the cookie
     //sending a mail from the server to the client
 mailTransport.sendMail({
     from: '"Meadowlark Travel" <dopeman827@gmail.com>' ,
@@ -362,9 +362,18 @@ mailTransport.sendMail({
 //     // console.log('Email (from visible form field): ' + req.body.email);
  
     
-//     // var signedMonster = req.signedCookies.monster; //to retrieve the value of the cookie
-//     // console.log(signedMonster);
-   res.redirect(303, '/thank-you' );
+    //  var cookie = req.signedCookies.monster; //to retrieve the value of the cookie
+    //  console.log(cookie);
+    req.session.flash = {
+        type: 'success',
+        intro: 'Thank you',
+        message: 'You have now subscribed for newsletter'
+    };
+    res.redirect(303, 'thank-you' );
+    // res.status(200).render('about');
+   });
+   app.get(function(req, res){
+       res.render('thank-you');
    });
 
 //MAKING A POST FOR THE FLASH MESSAGE FOR THE NEWSLETTER FORM
