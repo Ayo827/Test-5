@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
-      {{#each flash}}
-        <div class="flash">
-            <b>{{flash.into}}</b>
-            <p>{{flash.type}}</p>
-            <p>{{{flash.message}}}</p>
-        </div>
-    {{/each}}
+       {{#if flash}}
+    <div class="alert alert-dismissible alert-{{flash.type}}" >
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true" onclick="removepro;" >&times; <button>
+            <strong>{{flash.intro}}</strong> {{{flash.message}}}
+    </div>
+{{/if}}
+<script>
+    function removepro(){
+    var child = document.getElementsByClassName('close');
+        child.removeChild(child);
+        console.log("The div has been cleared");
+    
+}
+</script>
+    <h1>My name is Ay</h1>
 </html>

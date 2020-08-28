@@ -232,13 +232,13 @@ app.set('port', process.env.PORT || 3000);
 // });
 
 //Making a middleware for a flash message
-app.use(function(req, res, next){
-    // if there's a flash message, transfer
-    // it to the context, then clear it
-    res.locals.flash = req.session.flash;
-    console.log(req.session.flash);
-    next();
-   });
+// app.use(function(req, res, next){
+//     // if there's a flash message, transfer
+//     // it to the context, then clear it
+//     res.locals.flash = req.session.flash;
+//     console.log(req.session.flash);
+//     next();
+//    });
 
 //ROUTES
 // app.get('/*', function(req, res){
@@ -259,11 +259,15 @@ var fortunes = [
 app.get('/about', function(req, res){
     //var randomFortune = fortunes[Math.floor(Math.random() *  fortunes.length)];
     res.render('about', {fortune: fortune.getFortune(),
-    pageTestScript: '/qa/tests-about.js'
+    pageTestScript: '/qa/tests-about.js',
+    // _csrfToken: req.csrfToken()
     });
 });
 app.get('/contest/vacation-photo', function(req, res){ 
     res.render('contest/vacation-photo');
+});
+app.get('/thank-you', function(req, res){
+    res.render('thank-you');
 });
 function getWeatherData(){
     var locations = [
@@ -322,7 +326,7 @@ app.post('/request-rate', function(req, res){
 app.get('/newsletter' , function(req, res, next){
     // we will learn about CSRF later...for now, we just
                                 // provide a dummy value
-    res.render('newsletter' /*, { _csrf: req.csrfToken() }*/);
+    res.render('newsletter'/* , { _csrfToken: req.csurfToken() }*/);
    });
 //    app.post('/process', function(req, res){
 //     if(req.session.page_views){
@@ -337,11 +341,11 @@ app.get('/newsletter' , function(req, res, next){
 app.post('/process' , function(req, res){
     var id;
     req.session.id = req.session.id || {name: req.body.name, email: req.body.email};
-    req.session.id = id;
     id = {name: req.body.name, email: req.body.email};
     console.log(req.session.id);
     console.log(id);
-   req.session.user = 'Anonymous';
+   req.session.name = req.body.name;
+   req.session.email = req.body.email;
    req.session.cookie = {id: req.session.id};
    res.cookie('monster', 'nom nom', {signed: true, path: '/process', httpOnly: true, sameSite: true, secure:true, maxAge: 6000}, {id: req.session.id});//setting up the cookie
     //sending a mail from the server to the client
@@ -369,12 +373,12 @@ mailTransport.sendMail({
         intro: 'Thank you',
         message: 'You have now subscribed for newsletter'
     };
-    res.redirect(303, 'thank-you' );
+
+     res.render('thank-you', {flash: req.session.flash} );
+    delete req.session.flash;
     // res.status(200).render('about');
-   });
-   app.get(function(req, res){
-       res.render('thank-you');
-   });
+});
+  
 
 //MAKING A POST FOR THE FLASH MESSAGE FOR THE NEWSLETTER FORM
 // app.post('/process' , function(req, res){
@@ -479,16 +483,12 @@ app.set('env', 'development');
 switch(app. get('env' )){
     case 'development' :
     // compact, colorful dev logging
-    var accessLogStream = fs.createWriteStream(
-        path.join(__dirname, 'access.log'), {flags: 'a'}
-   );
+    var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
     app.use(require('morgan')('dev',  {stream: accessLogStream}));
     break;
     case 'production' :
     // module 'express-logger' supports daily log rotation
-    app. use(require('express-logger' )({
-    path: __dirname + '/log/requests.log'
-    }));
+    app. use(require('express-logger' )({  path: __dirname + '/log/requests.log'}));
     break;
    }
    var options = {
