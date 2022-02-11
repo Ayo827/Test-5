@@ -16,7 +16,7 @@
     "csrf": "^3.1.0",
     "csurf": "^1.11.0",
     "express": "^4.17.1",
-    "express-handlebars": "^4.0.4",
+    "express-handlebars": "^5.3.1",
     "express-session": "^1.17.1",
     "formidable": "^1.2.2",
     "loadtest": "^5.0.4",
